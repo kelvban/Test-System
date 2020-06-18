@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.kill.dao.KillSeckillDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.kill.entity.KillSeckillEntity" id="killSeckillMap">
+        <result property="seckillId" column="seckill_id"/>
+        <result property="name" column="name"/>
+        <result property="number" column="number"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="status" column="status"/>
+        <result property="seckillStatus" column="seckill_status"/>
+    </resultMap>
+
+    <!-- 根据key，查询value -->
+    <select id="queryByKey" parameterType="string" resultType="io.renren.modules.kill.entity.KillSeckillEntity">
+		select * from kill_seckill where name = #{name}
+	</select>
+
+    <!-- 查询所有正在运行的数据 -->
+    <select id="queryALLRunning"  resultType="io.renren.modules.kill.entity.KillSeckillEntity">
+		select * from kill_seckill where seckill_status="1";
+	</select>
+
+</mapper>
